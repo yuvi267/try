@@ -5,9 +5,13 @@ pipeline {
         stage('build'){
             steps{
                 script{
-                    app = docker.build("yuvi267/try")
+                    app = docker.build("pavansh/testrepo")
+                    docker.withRegistry('', 'dockerhub wala'){
+                        app.push("${env.BUILD_NUMBER}")
+                    }
                 }
             }
         }
     }  
 }
+
